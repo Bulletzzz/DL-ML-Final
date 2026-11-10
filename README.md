@@ -28,6 +28,7 @@ O gerador usa o Microsoft Edge que já vem no Windows, então não é preciso ba
 | `extrair_frames.py` | Transforma os vídeos em fotos |
 | `train.py` | Treina o modelo e gera as curvas e o PDF do dataset |
 | `detectar.py` | Reconhece os Pokémon em um vídeo ou na webcam |
+| `experimentos/sem_costas.py` | Monta o dataset sem as costas de um Pokémon (pergunta 3) |
 
 ## Como rodar
 
@@ -83,30 +84,44 @@ Pokemon encontrados no video: ['charmander', 'pikachu', 'psyduck']
 
 ## Experimentos da Parte 5
 
-Pergunta 1, split aleatório por foto:
+Pergunta 1, split aleatório por foto (99,68% na validação, mas não melhora no vídeo de teste):
 
 ```bash
 python train.py --split foto --saida experimentos/split_foto
 ```
 
 ```bash
-python detectar.py video_teste.mp4 --modelo experimentos/split_foto
+python detectar.py videos_teste/video_teste.mp4 --modelo experimentos/split_foto
 ```
 
-Pergunta 2, fine-tuning com taxa 1e-3:
+Pergunta 2, fine-tuning com taxa 1e-3 (a loss de validação chega a 26,9):
 
 ```bash
 python train.py --lr-fine 1e-3 --saida experimentos/lr_alta
 ```
 
-Pergunta 3, sem os frames de costas de um Pokémon: copie `data/` para `experimentos/sem_costas/data`, apague nela esses frames e treine.
+Pergunta 3, sem as costas do Pikachu (ele ainda é reconhecido de costas, com confiança menor):
+
+```bash
+python experimentos/sem_costas.py pikachu
+```
 
 ```bash
 python train.py --dados experimentos/sem_costas/data --saida experimentos/sem_costas
 ```
 
 ```bash
-python detectar.py video_costas.mp4 --modelo experimentos/sem_costas
+python detectar.py videos_teste/costas_pikachu.mp4 --modelo experimentos/sem_costas
 ```
 
-Perguntas 4 e 5: rode o `detectar.py` no vídeo com um Pokémon que não está no treino e no vídeo com dois Pokémon no mesmo quadro.
+Pergunta 4, Pokémon fora do treino (o Bulbasaur vira Psyduck ou `?`):
+
+```bash
+python detectar.py videos_teste/desconhecido_bulbasaur.mp4
+```
+
+Pergunta 5, dois Pokémon no mesmo quadro (o modelo escolhe um só):
+
+```bash
+python detectar.py videos_teste/dois_pokemon.mp4
+```
