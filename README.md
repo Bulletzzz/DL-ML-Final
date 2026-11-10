@@ -47,7 +47,7 @@ python train.py
 python detectar.py videos_teste/video_teste.mp4
 ```
 
-O gerador cria 6 vídeos por classe em `videos/`, metade em fundo claro e metade em escuro. Cada vídeo passa por frente, lados, costas, de cima, de baixo, perto e longe. A classe `fundo` usa as mesmas salas sem Pokémon. O ângulo da câmera em cada frame fica salvo em `gerador/angulos/`.
+O gerador cria 6 vídeos por classe em `videos/`, metade em fundo claro e metade em escuro. Cada vídeo passa por frente, lados, costas, de cima, de baixo, perto e longe. A classe `fundo` usa as mesmas salas sem Pokémon. O ângulo da câmera em cada frame fica salvo em `gerador/angulos/`. Os vídeos de teste ficam em `videos_teste/`, numa sala com parede de tijolo e chão xadrez que não aparece no treino.
 
 O treino gera `modelo.keras`, `modelo_fase1.keras`, `class_names.json`, `curvas.png` e `dataset_imagens.pdf`, e imprime a matriz de confusão de cada fase. A detecção gera o vídeo anotado `saida_<nome>.mp4` e imprime a linha do tempo.
 
@@ -69,6 +69,16 @@ charmander       75        0        0        0
      fundo        0       79        0        0
    pikachu        3        6       50        7
    psyduck        0        0        0       69
+```
+
+No vídeo de teste, os três Pokémon aparecem de 2 a 14 s, de 16 a 28 s e de 30 a 42 s:
+
+```
+Linha do tempo (Pokemon identificados) | janela 8, limiar 60%:
+     2.4s a   14.2s  ->  pikachu
+    16.3s a   28.0s  ->  psyduck
+    30.3s a   42.2s  ->  charmander
+Pokemon encontrados no video: ['charmander', 'pikachu', 'psyduck']
 ```
 
 ## Experimentos da Parte 5
