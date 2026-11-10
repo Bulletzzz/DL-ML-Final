@@ -59,6 +59,18 @@ Para usar a webcam, rode `python detectar.py 0` e aperte `q` para sair. Para pro
 - **Linha do tempo** (`detectar.py`): no fim do vídeo, imprime em que trechos cada Pokémon apareceu e a lista dos encontrados, ignorando trechos com menos de 0,5 s.
 - **Fine-tuning** (`train.py`): depois de treinar só a cabeça, libera as últimas 30 camadas da MobileNetV2 e continua com taxa de aprendizado 1e-5. O `curvas.png` mostra as duas fases e marca onde o fine-tuning começa.
 
+## Resultados
+
+Foram de 347 a 413 fotos por classe. A validação separa um vídeo inteiro de cada classe. O modelo acertou 91,35% da validação no fim da fase 1 e 94,46% depois do fine-tuning. O Pikachu é o mais difícil (recall de 75,8%), porque às vezes vira Psyduck, o outro amarelo.
+
+```
+           charmand    fundo  pikachu  psyduck
+charmander       75        0        0        0
+     fundo        0       79        0        0
+   pikachu        3        6       50        7
+   psyduck        0        0        0       69
+```
+
 ## Experimentos da Parte 5
 
 Pergunta 1, split aleatório por foto:
