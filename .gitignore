@@ -1,0 +1,6 @@
+__pycache__/
+data/
+experimentos/*/data/
+experimentos/*/*.keras
+experimentos/*/dataset_imagens.pdf
+gerador/modelos/
