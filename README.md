@@ -4,20 +4,26 @@ Andrew Bertelli, Bernardo Kuster Ragugnetti, Eduardo Sochodolak e Pedro Henrique
 
 Machine Learning e Deep Learning, 6º período de Engenharia de Software.
 
-Modelo com transfer learning (MobileNetV2) que identifica Pokémon em vídeo, vistos de vários ângulos. Partimos do exemplo do PDF da atividade e implementamos as três melhorias pedidas na Parte 4.
+Modelo com transfer learning (MobileNetV2) que identifica Pikachu, Psyduck e Charmander em vídeo, vistos de vários ângulos. Partimos do exemplo do PDF da atividade e implementamos as três melhorias pedidas na Parte 4.
+
+Os vídeos foram gerados a partir dos modelos 3D da [Pokemon-3D-api](https://github.com/Pokemon-3D-api), com uso autorizado pela professora. Pikachu e Psyduck são os dois amarelos, como o PDF sugere.
 
 Os comentários no código estão ali porque o PDF pede comentários explicando as partes que o grupo implementou.
 
 ## Instalação
 
 ```bash
-pip install tensorflow numpy matplotlib opencv-python pillow
+pip install tensorflow numpy matplotlib opencv-python pillow playwright
 ```
+
+O gerador usa o Microsoft Edge que já vem no Windows, então não é preciso baixar outro navegador.
 
 ## Arquivos
 
 | Arquivo | Função |
 |---|---|
+| `gerador/gerar_videos.py` | Baixa os modelos 3D e grava os vídeos de treino e de teste |
+| `gerador/estudio.js` | Monta a cena 3D e move a câmera pelos ângulos da tabela do PDF |
 | `utils.py` | Prepara a imagem do mesmo jeito no treino e na detecção |
 | `extrair_frames.py` | Transforma os vídeos em fotos |
 | `train.py` | Treina o modelo e gera as curvas e o PDF do dataset |
@@ -25,7 +31,9 @@ pip install tensorflow numpy matplotlib opencv-python pillow
 
 ## Como rodar
 
-Os vídeos ficam em `videos/`, com uma subpasta por Pokémon e uma chamada `fundo`, para os vídeos sem Pokémon.
+```bash
+python gerador/gerar_videos.py
+```
 
 ```bash
 python extrair_frames.py
@@ -36,8 +44,10 @@ python train.py
 ```
 
 ```bash
-python detectar.py video_teste.mp4
+python detectar.py videos_teste/video_teste.mp4
 ```
+
+O gerador cria os vídeos em `videos/`, com uma subpasta por Pokémon e uma chamada `fundo`, e os vídeos de teste em `videos_teste/`.
 
 O treino gera `modelo.keras`, `modelo_fase1.keras`, `class_names.json`, `curvas.png` e `dataset_imagens.pdf`, e imprime a matriz de confusão de cada fase. A detecção gera o vídeo anotado `saida_<nome>.mp4` e imprime a linha do tempo.
 
