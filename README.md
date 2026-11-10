@@ -47,7 +47,7 @@ python train.py
 python detectar.py videos_teste/video_teste.mp4
 ```
 
-O gerador cria os vídeos em `videos/`, com uma subpasta por Pokémon e uma chamada `fundo`, e os vídeos de teste em `videos_teste/`.
+O gerador cria 6 vídeos por classe em `videos/`, metade em fundo claro e metade em escuro. Cada vídeo passa por frente, lados, costas, de cima, de baixo, perto e longe. A classe `fundo` usa as mesmas salas sem Pokémon. O ângulo da câmera em cada frame fica salvo em `gerador/angulos/`.
 
 O treino gera `modelo.keras`, `modelo_fase1.keras`, `class_names.json`, `curvas.png` e `dataset_imagens.pdf`, e imprime a matriz de confusão de cada fase. A detecção gera o vídeo anotado `saida_<nome>.mp4` e imprime a linha do tempo.
 
