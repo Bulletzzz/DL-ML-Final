@@ -23,7 +23,9 @@ O gerador usa o Microsoft Edge que já vem no Windows, então não é preciso ba
 | Arquivo | Função |
 |---|---|
 | `gerador/gerar_videos.py` | Baixa os modelos 3D e grava os vídeos de treino e de teste |
-| `gerador/estudio.js` | Monta a cena 3D e move a câmera pelos ângulos da tabela do PDF |
+| `gerador/cena.js` | Sala, luzes e carregamento dos modelos 3D, usados pelo estúdio e pelo visualizador |
+| `gerador/estudio.js` | Move a câmera pelos ângulos da tabela do PDF para gravar os vídeos |
+| `gerador/visualizar.py` | Abre o visualizador 3D no navegador para ver e gravar os Pokémon |
 | `utils.py` | Prepara a imagem do mesmo jeito no treino e na detecção |
 | `extrair_frames.py` | Transforma os vídeos em fotos |
 | `train.py` | Treina o modelo e gera as curvas e o PDF do dataset |
@@ -53,6 +55,14 @@ O gerador cria 6 vídeos por classe em `videos/`, metade em fundo claro e metade
 O treino gera `modelo.keras`, `modelo_fase1.keras`, `class_names.json`, `curvas.png` e `dataset_imagens.pdf`, e imprime a matriz de confusão de cada fase. A detecção gera o vídeo anotado `saida_<nome>.mp4` e imprime a linha do tempo.
 
 Para usar a webcam, rode `python detectar.py 0` e aperte `q` para sair. Para processar sem abrir janela, defina `MOSTRAR=0` antes do comando (`set MOSTRAR=0` no cmd ou `$env:MOSTRAR=0` no PowerShell).
+
+## Visualizador 3D
+
+```bash
+python gerador/visualizar.py
+```
+
+Abre os modelos no navegador. Dá para escolher o Pokémon e a sala, girar a câmera com o mouse ou pelos botões e gravar. Os vídeos gravados vão para `videos_gravados/` em mp4 e podem ser passados direto para o `detectar.py`.
 
 ## Melhorias implementadas
 

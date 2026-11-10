@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visualizador Pokemon</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #0d0e11; color: #e8e8ea; font: 14px system-ui, sans-serif; }
+  body { display: flex; }
+  #palco { flex: 1; display: flex; align-items: center; justify-content: center; min-width: 0; position: relative; }
+  #rec { position: absolute; top: 16px; left: 16px; background: #c62828; color: #fff; padding: 4px 10px; font-weight: 700; display: none; }
+  aside { width: 300px; padding: 20px; background: #16181d; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+  h1 { margin: 0; font-size: 18px; }
+  h2 { margin: 6px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #8a8f99; }
+  label { display: flex; flex-direction: column; gap: 4px; }
+  label.linha { flex-direction: row; align-items: center; gap: 8px; }
+  select, input[type=number], button { font: inherit; color: inherit; background: #22252c; border: 1px solid #333844; padding: 7px 9px; }
+  button { cursor: pointer; }
+  button:hover { background: #2c3039; }
+  .grade { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .junto { display: flex; gap: 6px; }
+  .junto input { flex: 1; min-width: 0; }
+  #valores { font-family: ui-monospace, monospace; color: #b9bec8; }
+  #gravar { background: #b71c1c; border-color: #b71c1c; font-weight: 700; padding: 10px; }
+  #gravar.ativo { background: #22252c; border-color: #b71c1c; }
+  #estado { color: #8a8f99; min-height: 1.4em; word-break: break-all; }
+  .dica { color: #8a8f99; font-size: 12px; margin: 0; }
+  @media (max-width: 760px) { body { flex-direction: column; } aside { width: 100%; } #palco { min-height: 60vh; } }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="palco"><div id="rec">REC 00:00</div></div>
+<aside>
+  <h1>Visualizador Pokémon</h1>
+  <p class="dica">Arraste para girar a câmera, use a roda do mouse para aproximar.</p>
+
+  <h2>Cena</h2>
+  <label>Pokémon
+    <select id="pokemon">
+      <option value="25">Pikachu</option>
+      <option value="54">Psyduck</option>
+      <option value="4">Charmander</option>
+      <option value="1">Bulbasaur (fora do treino)</option>
+      <option value="25,4">Pikachu + Charmander</option>
+      <option value="">Nenhum (fundo)</option>
+    </select>
+  </label>
+  <label>Sala
+    <select id="sala">
+      <option value="claro">Clara (treino)</option>
+      <option value="escuro">Escura (treino)</option>
+      <option value="teste">Tijolo e xadrez (teste)</option>
+    </select>
+  </label>
+  <label>Semente da sala
+    <span class="junto"><input id="semente" type="number" value="900"><button id="sortear">Sortear</button></span>
+  </label>
+
+  <h2>Câmera</h2>
+  <div class="grade">
+    <button data-pose="frente">Frente</button>
+    <button data-pose="costas">Costas</button>
+    <button data-pose="lado90">Lado 90°</button>
+    <button data-pose="lado270">Lado 270°</button>
+    <button data-pose="cima">De cima</button>
+    <button data-pose="baixo">De baixo</button>
+    <button data-pose="perto">Perto</button>
+    <button data-pose="longe">Longe</button>
+  </div>
+  <label>Azimute <input id="az" type="range" min="0" max="360" step="1"></label>
+  <label>Elevação <input id="el" type="range" min="-35" max="80" step="1"></label>
+  <label>Distância <input id="dist" type="range" min="0.6" max="5.5" step="0.05"></label>
+  <div id="valores"></div>
+  <label class="linha"><input id="girar" type="checkbox"> Girar sozinho</label>
+  <label>Velocidade do giro <input id="velocidade" type="range" min="0.5" max="12" step="0.5" value="3"></label>
+  <label class="linha"><input id="animar" type="checkbox" checked> Animação do Pokémon</label>
+
+  <h2>Gravação</h2>
+  <button id="gravar">● Gravar</button>
+  <div id="estado"></div>
+</aside>
+<script type="module" src="visualizador.js"></script>
+</body>
+</html>
