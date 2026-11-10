@@ -129,7 +129,7 @@ python detectar.py videos_teste/dois_pokemon.mp4
 ## Entrega
 
 - `dataset_imagens.pdf`: imagens do dataset separadas por classe
-- `saida_video_teste.mp4`: vídeo de teste anotado
+- `saida_video_teste.mp4` e `prints/linha_do_tempo.png`: vídeo de teste anotado e print da linha do tempo
 - `train.py` e `detectar.py`: códigos adaptados
-- `curvas.png`: curvas das duas fases do treino
-- `Relatorio Parte 5.pdf`: respostas da Parte 5, com a matriz de confusão e a linha do tempo
+- `curvas.png` e `prints/matriz_confusao.png`: curvas das duas fases do treino e print da matriz de confusão
+- `Relatorio Parte 5.pdf`: respostas da Parte 5, com os prints, as curvas e os experimentos
