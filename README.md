@@ -125,3 +125,11 @@ Pergunta 5, dois Pokémon no mesmo quadro (o modelo escolhe um só):
 ```bash
 python detectar.py videos_teste/dois_pokemon.mp4
 ```
+
+## Entrega
+
+- `dataset_imagens.pdf`: imagens do dataset separadas por classe
+- `saida_video_teste.mp4`: vídeo de teste anotado
+- `train.py` e `detectar.py`: códigos adaptados
+- `curvas.png`: curvas das duas fases do treino
+- `Relatorio Parte 5.pdf`: respostas da Parte 5, com a matriz de confusão e a linha do tempo
